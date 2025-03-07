@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NeuroNest AI Form</title>
+    <style>
+        
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    text-align: left;
+    color: #333;
+}
+
+form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="number"], input[type="email"], input[type="source"], input[type="date"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"], input[type="reset"] {
+    background-color:rgb(255, 223, 0);
+    border: none;
+    color:black;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color:rgb(255, 190, 0);
+}
+
+
+
+.error {
+    color: #d9534f;
+    font-size: 14px;
+}
+
+    </style>
+  </head>
+  <body>
+   
+    <form onsubmit="return validateForm()">
+        <table>
+            <h2>Add lead</h2>
+            <tr>
+               <td><label>Name</label></td> 
+                <td><input type="text" placeholder="Name" id="name" /></td>
+                <td><span id="nameError" class="error"></span></td>
+              </tr>
+              <tr>
+                <td><label>Mobile</label></td> 
+                <td><input type="number" placeholder="Number" id="number" /></td>
+                <td><span id="numberError" class="error"></span></td>
+              </tr>
+              <tr>
+                <td><label>Email</label></td> 
+                <td><input type="email" placeholder="Email" id="email" /></td>
+                <td><span id="emailError" class="error"></span></td>              
+              </tr>
+              <tr>
+                <td><label>Source</label></td> 
+                <td><input type="text" placeholder="Source" id="source" /></td>
+                <td><span id="sourceError" class="error"></span></td>              
+              </tr>
+              <tr>
+                <td><label>Date</label></td> 
+                <td><input type="date" placeholder="date" id="date" /></td>
+                <td><span id="dateError" class="error"></span></td>              
+              </tr>
+              <tr>
+                <td><input type="reset" value="Cancel"  ></td> 
+               <td><input type="submit" value="Save & Add new" /></td> 
+              </tr>
+        </table>   
+    </form>
+
+    <script>
+        function validateForm(){
+            // Get inputs
+            var name = document.getElementById('name').value;
+            var number = document.getElementById('number').value;
+            var email = document.getElementById('email').value;
+            var source = document.getElementById('source').value;
+            var date = document.getElementById('date').value; 
+            // reset error messages
+            document.getElementById('nameError').innerHTML = '';
+            document.getElementById('numberError').innerHTML = '';
+            document.getElementById('emailError').innerHTML = '';
+            document.getElementById('sourceError').innerHTML = '';
+            document.getElementById('dateError').innerHTML = ''; 
+
+            // validate name
+            if(name === ''){
+                document.getElementById('nameError').innerHTML = 'Name is required';
+                return false;
+            }
+            if(number === ''){
+                document.getElementById('numberError').innerHTML = 'Number is required';
+                return false;
+            }
+            // validate email
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(email === ''){
+                document.getElementById('emailError').innerHTML = 'Email is required';
+                return false;
+            } else if(!emailRegex.test(email)){
+                document.getElementById('emailError').innerHTML = 'Invalid email format';
+                return false;
+            }
+
+            if(source === ''){
+                document.getElementById('sourceError').innerHTML = 'Source is required';
+                return false;
+            }
+            if(date === ''){
+                document.getElementById('dateError').innerHTML = 'Date is required';
+                return false;
+            } 
+
+            return true; // form is valid
+           
+        }
+    </script>
+  </body>
+</html>
